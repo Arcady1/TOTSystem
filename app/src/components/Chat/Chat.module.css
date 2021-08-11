@@ -1,0 +1,80 @@
+.chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 70%;
+    height: 100%;
+}
+
+.chat__wrapper {
+    overflow: auto;
+}
+
+.chat__wrapper::-webkit-scrollbar {
+    width: 0;
+}
+
+.chat_padding {
+    padding-left: calc(max(2%, 10px));
+    padding-top: calc(max(2%, 10px));
+}
+
+.chat__input__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    max-height: 75px;
+}
+
+.chat__input__wrapper_margin {
+    margin-top: calc(2 * var(--message-margin));
+}
+
+.chat__input {
+    display: block;
+    width: 90%;
+    height: 100%;
+    background-color: var(--message-bgc);
+    border-radius: var(--message-border-radius);
+    resize: none;
+    border: none;
+
+    font-family: inherit;
+    font-size: .9rem;
+    line-height: 1rem;
+    transition: var(--main-transition);
+    border: 1.5px solid transparent;
+}
+
+.chat__input:focus {
+    outline: none;
+    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
+        0px 6px 10px rgba(0, 0, 0, 0.02);
+    border: 1.5px solid #000;
+    color: #000;
+}
+
+.chat__input_padding {
+    padding: calc(max(2%, 10px));
+}
+
+.chat__input_margin {
+    margin-right: 10px;
+}
+
+.chat__sendButton {
+    display: block;
+    width: var(--submit-button-size);
+    height: var(--submit-button-size);
+    background-image: url('https://image.flaticon.com/icons/png/512/736/736212.png');
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    transition: var(--main-transition);
+}
+
+.chat__sendButton:hover {
+    transform: scale(1.3);
+}

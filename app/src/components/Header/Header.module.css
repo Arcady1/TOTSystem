@@ -1,0 +1,12 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: var(--header-height);
+    background-color: #fff;
+    border-radius: var(--message-border-radius) var(--message-border-radius) var(--message-border-radius) 0;
+
+    font-weight: 600;
+    font-size: 1.5rem;
+}

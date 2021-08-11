@@ -1,0 +1,34 @@
+.chatlistItem {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    transition: var(--main-transition);
+}
+
+.chatlistItem_padding {
+    padding: 4%;
+}
+
+.chatlistItem:hover {
+    cursor: pointer;
+    background-color: var(--main-bgc);
+}
+
+.chatImage {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
+.chatImage_margin {
+    margin-right: 10px;
+}
+
+.chatName {
+    display: block;
+    width: auto;
+    height: auto;
+    font-size: 1rem;
+}

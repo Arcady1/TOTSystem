@@ -1,0 +1,27 @@
+.content__wrapper {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.content {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: 100vh;
+  background-color: var(--main-bgc);
+}
+
+.content_padding {
+  padding: calc(0px + 50*(min(100%, var(--max-width)) - 425px)/(1440 - 425));
+}
+
+.content_margin {
+  margin: 0 auto;
+}
+
+.main {
+  display: flex;
+  width: 100%;
+  height: calc(100% - var(--header-height));
+}

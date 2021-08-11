@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li,
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+input,
+button,
+input:focus {
+  background-color: inherit;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #223c50;
+}
+
+:root {
+  --max-width: 1440px;
+  --min-width: 320px;
+  --main-bgc: #eee;
+  --main-transition: .3s;
+
+  /* Header */
+  --header-height: 60px;
+  /* Chat */
+  --submit-button-size: 25px;
+  /* Message */
+  --message-bgc: #fff;
+  --message-arrow-size: 10px;
+  --message-border-radius: 10px;
+  --message-margin: 10px;
+}
+
+html {
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* font-family: 'Raleway', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');

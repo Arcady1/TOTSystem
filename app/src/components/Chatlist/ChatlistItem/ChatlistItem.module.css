@@ -15,6 +15,10 @@
     background-color: var(--main-bgc);
 }
 
+.chatlistItem_active {
+    background-color: var(--main-bgc);
+}
+
 .chatImage {
     display: block;
     width: 1.5rem;

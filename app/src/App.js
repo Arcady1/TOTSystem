@@ -15,7 +15,7 @@ function App() {
     1: {
       id: 1,
       avaSrc: "https://pbs.twimg.com/profile_images/865695281492381696/81tOUsc7_400x400.jpg",
-      name: "Kirill",
+      name: "Me",
     },
     2: {
       id: 2,
@@ -79,6 +79,20 @@ function App() {
     setChatType(chatId);
   }
 
+  function handleMessageSend(messageInfo) {
+    const dialog = dialogs.find((elem) => elem.dialogId === messageInfo.chatId);
+
+    dialog.dialogMessages.push({
+      userData: usersInfo[messageInfo.userId],
+      userText: `${messageInfo.text}`
+    });
+
+    if (dialog.dialogName === "Business")
+      setBusinessMessages(businessMessages.slice());
+    else if (dialog.dialogName === "Flood")
+      setFloodMessages(floodMessages.slice());
+  }
+
   return (
     <div className={style.content__wrapper}>
       <div className={`${style.content} ${style.content_padding} ${style.content_margin}`}>
@@ -87,8 +101,13 @@ function App() {
           <Chatlist
             dialogs={dialogs}
             switchChat={(chatId) => switchChat(chatId)}
+            activeChatId={chatTypeId}
           />
-          <Chat messages={dialogs[chatTypeId].dialogMessages} />
+          <Chat
+            messages={dialogs[chatTypeId].dialogMessages}
+            chatId={chatTypeId}
+            handleMessageSend={(messageInfo) => handleMessageSend(messageInfo)}
+          />
         </div>
       </div>
     </div>

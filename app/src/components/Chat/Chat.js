@@ -17,12 +17,35 @@ function Chat(props) {
             </div>
             <div className={`${style.chat__input__wrapper} ${style.chat__input__wrapper_margin}`}>
                 <textarea
+                    id="messageInput"
                     className={`${style.chat__input} ${style.chat__input_padding} ${style.chat__input_margin}`}
                     rows="30"
                     cols="30"
                     placeholder="Message"
                 />
-                <button className={style.chat__sendButton}></button>
+                <button
+                    className={style.chat__sendButton}
+                    onClick={(event) => {
+                        event.preventDefault();
+
+                        const inputElem = document.getElementById("messageInput");
+                        const inputValue = inputElem.value;
+
+                        if (!/(\s*\S+\s*)+/g.test(inputValue)) {
+                            inputElem.value = "";
+                            return false;
+                        }
+
+                        inputElem.value = "";
+
+                        props.handleMessageSend({
+                            chatId: props.chatId,
+                            userId: 1,
+                            text: inputValue
+                        });
+                    }}
+                >
+                </button>
             </div>
         </div>
     )

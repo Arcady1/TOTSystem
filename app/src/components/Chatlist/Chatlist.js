@@ -10,6 +10,7 @@ function Chatlist(props) {
                     title={elem.dialogName}
                     key={elem.dialogName}
                     id_={elem.dialogId}
+                    activeDialogId={props.activeChatId}
                     switchChat={(id) => props.switchChat(id)}
                 />
             ))}

@@ -48,6 +48,7 @@ button:hover {
   --message-arrow-size: 10px;
   --message-border-radius: 10px;
   --message-margin: 10px;
+  --message-icon-size: 30px;
 }
 
 html {

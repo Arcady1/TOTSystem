@@ -1,28 +1,16 @@
-import React from 'react';
 import { ChatlistItem } from './ChatlistItem/ChatlistItem';
 import style from './Chatlist.module.css';
 
-function Chatlist() {
+function Chatlist(props) {
     return (
         <div className={style.chatList}>
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
-            <ChatlistItem />
+            {props.dialogs.map((elem) => (
+                <ChatlistItem
+                    imgSrc={elem.dialogImgSrc}
+                    title={elem.dialogName}
+                    key={elem.dialogName}
+                />
+            ))}
         </div>
     )
 }

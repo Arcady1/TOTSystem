@@ -12,6 +12,10 @@ function Chat(props) {
                         userName={elem.userData.name}
                         userMessageText={elem.userText}
                         key={new Date() - 0 + Math.random()}
+                        messageSenderId={elem.userData.id}
+                        userId={props.currentUserId}
+                        messageId={elem.id}
+                        onMessageRemove={() => props.onMessageRemove(elem.id)}
                     />
                 ))}
             </div>

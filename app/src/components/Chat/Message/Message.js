@@ -38,9 +38,20 @@ function Message(props) {
         return res;
     }
 
+    function removeMessageBlock(messageSenderId, userId) {
+        if (messageSenderId === userId)
+            return (
+                <RemoveMessage
+                    onMessageRemove={() => props.onMessageRemove()}
+                />
+            );
+        else
+            return null;
+    }
+
     return (
         <div className={`${style.message__wrapper} ${style.message__wrapper_padding} ${style.message__wrapper_margin}`}>
-            <RemoveMessage />
+            {removeMessageBlock(props.messageSenderId, props.userId)}
             <div className={`${style.message__description} ${style.message__description_margin}`}>
                 <img
                     src={props.userAvaSrc}

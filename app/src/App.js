@@ -27,14 +27,17 @@ function App() {
   // Сообщения в бизнес-переписке
   const [businessMessages, setBusinessMessages] = useState([
     {
+      id: 101,
       userData: usersInfo[0],
       userText: "Всем привет!"
     },
     {
+      id: 102,
       userData: usersInfo[1],
       userText: "Добрый день!"
     },
     {
+      id: 103,
       userData: usersInfo[2],
       userText: "Приветствую :)"
     }
@@ -43,14 +46,17 @@ function App() {
   // Сообщения в обычной-переписке
   const [floodMessages, setFloodMessages] = useState([
     {
+      id: 201,
       userData: usersInfo[1],
       userText: "Всем привет! Это флууд чат)"
     },
     {
+      id: 202,
       userData: usersInfo[2],
       userText: "Хай!"
     },
     {
+      id: 203,
       userData: usersInfo[0],
       userText: "Приветствую! Неформальное общение!)"
     }
@@ -79,18 +85,33 @@ function App() {
     setChatType(chatId);
   }
 
+  function updateMessagesData(messagesName) {
+    if (messagesName === "Business")
+      setBusinessMessages(businessMessages.slice());
+    else if (messagesName === "Flood")
+      setFloodMessages(floodMessages.slice());
+  }
+
   function handleMessageSend(messageInfo) {
-    const dialog = dialogs.find((elem) => elem.dialogId === messageInfo.chatId);
+    const dialog = dialogs[chatTypeId];
 
     dialog.dialogMessages.push({
+      id: new Date() - 0 + Math.random(),
       userData: usersInfo[messageInfo.userId],
       userText: `${messageInfo.text}`
     });
 
-    if (dialog.dialogName === "Business")
-      setBusinessMessages(businessMessages.slice());
-    else if (dialog.dialogName === "Flood")
-      setFloodMessages(floodMessages.slice());
+    updateMessagesData(dialog.dialogName);
+  }
+
+  function handleMessageRemove(messageId) {
+    const dialog = dialogs[chatTypeId].dialogMessages;
+    const newMessagesArr = dialog.filter((message) => (!(message.id === messageId)));
+
+    if (dialogs[chatTypeId].dialogName === "Business")
+      setBusinessMessages(newMessagesArr);
+    else if (dialogs[chatTypeId].dialogName === "Flood")
+      setFloodMessages(newMessagesArr);
   }
 
   return (
@@ -106,7 +127,9 @@ function App() {
           <Chat
             messages={dialogs[chatTypeId].dialogMessages}
             chatId={chatTypeId}
+            currentUserId={1}
             handleMessageSend={(messageInfo) => handleMessageSend(messageInfo)}
+            onMessageRemove={(messageId) => handleMessageRemove(messageId)}
           />
         </div>
       </div>

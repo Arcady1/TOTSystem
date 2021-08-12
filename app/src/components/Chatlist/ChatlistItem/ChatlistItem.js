@@ -3,7 +3,10 @@ import style from './ChatlistItem.module.css';
 
 function ChatlistItem(props) {
     return (
-        <div className={`${style.chatlistItem} ${style.chatlistItem_padding}`}>
+        <div
+            className={`${style.chatlistItem} ${style.chatlistItem_padding}`}
+            onClick={() => props.switchChat(props.id_)}
+        >
             <img
                 src={props.imgSrc}
                 alt="#"

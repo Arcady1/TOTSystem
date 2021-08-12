@@ -75,12 +75,19 @@ function App() {
   // Какой чат сейчас открыт
   const [chatTypeId, setChatType] = useState(0);
 
+  function switchChat(chatId) {
+    setChatType(chatId);
+  }
+
   return (
     <div className={style.content__wrapper}>
       <div className={`${style.content} ${style.content_padding} ${style.content_margin}`}>
         <Header />
         <div className={style.main}>
-          <Chatlist dialogs={dialogs} />
+          <Chatlist
+            dialogs={dialogs}
+            switchChat={(chatId) => switchChat(chatId)}
+          />
           <Chat messages={dialogs[chatTypeId].dialogMessages} />
         </div>
       </div>

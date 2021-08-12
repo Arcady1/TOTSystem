@@ -9,6 +9,8 @@ function Chatlist(props) {
                     imgSrc={elem.dialogImgSrc}
                     title={elem.dialogName}
                     key={elem.dialogName}
+                    id_={elem.dialogId}
+                    switchChat={(id) => props.switchChat(id)}
                 />
             ))}
         </div>

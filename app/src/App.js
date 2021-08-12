@@ -5,6 +5,8 @@ import { Chat } from './components/Chat/Chat';
 import style from './App.module.css';
 
 function App() {
+  const [currentMessageData, setCurrentMessageData] = useState(null);
+
   // Информация о каждом зарегистрированном пользователе 
   const usersInfo = {
     0: {
@@ -95,13 +97,21 @@ function App() {
   function handleMessageSend(messageInfo) {
     const dialog = dialogs[chatTypeId];
 
-    dialog.dialogMessages.push({
-      id: new Date() - 0 + Math.random(),
-      userData: usersInfo[messageInfo.userId],
-      userText: `${messageInfo.text}`
-    });
+    if (currentMessageData === null) {
+      dialog.dialogMessages.push({
+        id: new Date() - 0 + Math.random(),
+        userData: usersInfo[messageInfo.userId],
+        userText: messageInfo.text
+      });
 
-    updateMessagesData(dialog.dialogName);
+      updateMessagesData(dialog.dialogName);
+    }
+    else {
+      dialog.dialogMessages[currentMessageData.idx].userText = messageInfo.text;
+
+      updateMessagesData(dialog.dialogName);
+      setCurrentMessageData(null);
+    }
   }
 
   function handleMessageRemove(messageId) {
@@ -112,6 +122,26 @@ function App() {
       setBusinessMessages(newMessagesArr);
     else if (dialogs[chatTypeId].dialogName === "Flood")
       setFloodMessages(newMessagesArr);
+  }
+
+  function handleMessageCorrect(text, messageId) {
+    document.getElementById('messageInput').value = text;
+
+    const message = dialogs[chatTypeId].dialogMessages;
+    const messageData = {};
+
+    message.find((elem, idx) => {
+      if (elem.id === messageId) {
+        messageData.id = elem.id;
+        messageData.idx = idx;
+
+        return true;
+      }
+
+      return false;
+    });
+
+    setCurrentMessageData(messageData);
   }
 
   return (
@@ -130,6 +160,7 @@ function App() {
             currentUserId={1}
             handleMessageSend={(messageInfo) => handleMessageSend(messageInfo)}
             onMessageRemove={(messageId) => handleMessageRemove(messageId)}
+            handleMessageCorrect={(text, messageId) => handleMessageCorrect(text, messageId)}
           />
         </div>
       </div>

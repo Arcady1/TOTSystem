@@ -43,6 +43,7 @@ function Message(props) {
             return (
                 <RemoveMessage
                     onMessageRemove={() => props.onMessageRemove()}
+                    onMessageCorrect={() => props.onMessageCorrect()}
                 />
             );
         else
@@ -51,16 +52,16 @@ function Message(props) {
 
     return (
         <div className={`${style.message__wrapper} ${style.message__wrapper_padding} ${style.message__wrapper_margin}`}>
-            {removeMessageBlock(props.messageSenderId, props.userId)}
+            {removeMessageBlock(props.messageSenderId, props.userInfo.userId)}
             <div className={`${style.message__description} ${style.message__description_margin}`}>
                 <img
-                    src={props.userAvaSrc}
+                    src={props.userInfo.userAvaSrc}
                     alt="#"
                     className={`${style.message__icon} ${style.message__icon_margin}`}
                 />
-                <p className={style.message__userName}>{props.userName}</p>
+                <p className={style.message__userName}>{props.userInfo.userName}</p>
             </div>
-            <p className={`${style.message__text} ${style.message__text_margin}`}>{textConverter(props.userMessageText)}</p>
+            <p className={`${style.message__text} ${style.message__text_margin}`}>{textConverter(props.userInfo.userMessageText)}</p>
         </div>
     )
 }

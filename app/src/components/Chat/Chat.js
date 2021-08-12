@@ -1,4 +1,3 @@
-import React from 'react';
 import { Message } from './Message/Message';
 import style from './Chat.module.css';
 
@@ -8,14 +7,17 @@ function Chat(props) {
             <div className={style.chat__wrapper}>
                 {props.messages.map((elem) => (
                     <Message
-                        userAvaSrc={elem.userData.avaSrc}
-                        userName={elem.userData.name}
-                        userMessageText={elem.userText}
                         key={new Date() - 0 + Math.random()}
+                        userInfo={{
+                            userId: props.currentUserId,
+                            userAvaSrc: elem.userData.avaSrc,
+                            userName: elem.userData.name,
+                            userMessageText: elem.userText,
+                        }}
                         messageSenderId={elem.userData.id}
-                        userId={props.currentUserId}
                         messageId={elem.id}
                         onMessageRemove={() => props.onMessageRemove(elem.id)}
+                        onMessageCorrect={() => props.handleMessageCorrect(elem.userText, elem.id)}
                     />
                 ))}
             </div>
@@ -44,7 +46,7 @@ function Chat(props) {
 
                         props.handleMessageSend({
                             chatId: props.chatId,
-                            userId: 1,
+                            userId: props.currentUserId,
                             text: inputValue
                         });
                     }}

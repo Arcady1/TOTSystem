@@ -9,7 +9,11 @@ function RemoveMessage(props) {
                 onClick={() => props.onMessageRemove()}
             >
             </div>
-            <div className={`${style.correctMessage} ${style.removeAndCorrect} ${style.removeAndCorrect_margin}`}></div>
+            <div
+                className={`${style.correctMessage} ${style.removeAndCorrect} ${style.removeAndCorrect_margin}`}
+                onClick={() => props.onMessageCorrect()}
+            >
+            </div>
         </div>
     );
 }

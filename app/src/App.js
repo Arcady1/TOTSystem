@@ -28,15 +28,15 @@ function App() {
   const [businessMessages, setBusinessMessages] = useState([
     {
       userData: usersInfo[0],
-      userText: "Всем привет! "
+      userText: "Всем привет!"
     },
     {
       userData: usersInfo[1],
-      userText: "Добрый день! "
+      userText: "Добрый день!"
     },
     {
       userData: usersInfo[2],
-      userText: "Приветствую :) "
+      userText: "Приветствую :)"
     }
   ]);
 
@@ -44,20 +44,20 @@ function App() {
   const [floodMessages, setFloodMessages] = useState([
     {
       userData: usersInfo[1],
-      userText: "Всем привет! Это флууд чат) "
+      userText: "Всем привет! Это флууд чат)"
     },
     {
       userData: usersInfo[2],
-      userText: "Хай! "
+      userText: "Хай!"
     },
     {
       userData: usersInfo[0],
-      userText: "Приветствую! Неформальное общение!) "
+      userText: "Приветствую! Неформальное общение!)"
     }
   ]);
 
   // Чаты
-  const [dialogs, setDialog] = useState([
+  const dialogs = [
     {
       dialogId: 0,
       dialogImgSrc: "https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547__480.jpg",
@@ -70,7 +70,7 @@ function App() {
       dialogName: "Flood",
       dialogMessages: floodMessages,
     }
-  ]);
+  ];
 
   // Какой чат сейчас открыт
   const [chatTypeId, setChatType] = useState(0);

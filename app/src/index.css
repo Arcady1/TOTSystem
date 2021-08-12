@@ -49,6 +49,7 @@ button:hover {
   --message-border-radius: 10px;
   --message-margin: 10px;
   --message-icon-size: 30px;
+  --message-remove-icon-size: 15px;
 }
 
 html {

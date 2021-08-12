@@ -10,6 +10,7 @@
 
 .message__wrapper_padding {
     padding: calc(max(2%, 10px));
+    padding-right: calc(var(--message-remove-icon-size) + calc(var(--message-remove-icon-size) / 2));
 }
 
 .message__wrapper_margin {
@@ -18,6 +19,10 @@
 
 .message__wrapper:last-child {
     margin-bottom: 0;
+}
+
+.message__wrapper:hover div {
+    opacity: 1;
 }
 
 .message__description {

@@ -1,0 +1,41 @@
+.messageRemoveAndCorect {
+    position: absolute;
+    display: block;
+    top: calc(var(--message-remove-icon-size) / 3);
+    right: calc(var(--message-remove-icon-size) / 3);
+    width: auto;
+    height: auto;
+    transition: var(--main-transition);
+    opacity: 0;
+}
+
+.removeAndCorrect {
+    display: block;
+    width: var(--message-remove-icon-size);
+    height: var(--message-remove-icon-size);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 80%;
+    transition: var(--main-transition);
+}
+
+.removeAndCorrect:hover {
+    cursor: pointer;
+    transform: scale(1.3);
+}
+
+.removeAndCorrect_margin {
+    margin-top: calc(var(--message-remove-icon-size) / 3);
+}
+
+.removeAndCorrect:first-child {
+    margin-top: 0;
+}
+
+.removeMessage {
+    background-image: url('./img/cancel.svg');
+}
+
+.correctMessage {
+    background-image: url('./img/pen.svg');
+}

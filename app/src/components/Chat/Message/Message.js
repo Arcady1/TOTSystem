@@ -1,4 +1,5 @@
 import React from 'react';
+import { RemoveMessage } from './RemoveMessage/RemoveMessage';
 import style from './Message.module.css';
 
 function Message(props) {
@@ -13,11 +14,12 @@ function Message(props) {
             for (let j = 0; j < subText.length; j++) {
                 let txtJ = subText[j];
 
-                if (/http([s]?)\:{1,2}\S+/.test(txtJ.toString())) {
+                if (/http([s]?):{1,2}\S+/.test(txtJ.toString())) {
                     res.push(
                         <a
                             href={txtJ}
                             target="_blank"
+                            rel="noreferrer"
                             key={new Date() - 0 + Math.random()}
                             className={style.messageLink}
                         >
@@ -38,6 +40,7 @@ function Message(props) {
 
     return (
         <div className={`${style.message__wrapper} ${style.message__wrapper_padding} ${style.message__wrapper_margin}`}>
+            <RemoveMessage />
             <div className={`${style.message__description} ${style.message__description_margin}`}>
                 <img
                     src={props.userAvaSrc}

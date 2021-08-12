@@ -4,6 +4,7 @@
     width: 100%;
     height: auto;
     transition: var(--main-transition);
+    position: relative;
 }
 
 .chatlistItem_padding {

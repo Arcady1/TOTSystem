@@ -4,12 +4,33 @@ import style from './Message.module.css';
 function Message(props) {
     function textConverter(text) {
         let res = [];
+        let splitedText = text.split("\n");
 
-        for (let i = 0; i < text.length; i++) {
-            if (text[i] === "\n")
-                res.push(<br key={new Date - 0 + Math.random()} />);
-            else
-                res.push(text[i]);
+        for (let i = 0; i < splitedText.length; i++) {
+            let txtI = splitedText[i];
+            let subText = txtI.split(" ");
+
+            for (let j = 0; j < subText.length; j++) {
+                let txtJ = subText[j];
+
+                if (/http([s]?)\:{1,2}\S+/.test(txtJ.toString())) {
+                    res.push(
+                        <a
+                            href={txtJ}
+                            target="_blank"
+                            key={new Date() - 0 + Math.random()}
+                            className={style.messageLink}
+                        >
+                            {txtJ}
+                        </a>
+                    );
+                }
+                else
+                    res.push(txtJ);
+                res.push(" ");
+            }
+
+            res.push(<br key={new Date() - 0 + Math.random()} />);
         }
 
         return res;

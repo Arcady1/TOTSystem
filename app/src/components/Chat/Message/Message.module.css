@@ -61,3 +61,11 @@
 .message__text_margin {
     margin-left: calc(var(--message-icon-size) + calc(max(2%, 10px)));
 }
+
+.messageLink {
+    color: blue;
+}
+
+.messageLink:hover {
+    text-decoration: underline;
+}

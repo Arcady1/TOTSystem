@@ -174,6 +174,7 @@ function App() {
     }
 
     updateMessagesData(dialog.dialogName);
+    scrollChatToBottom();
   }
 
   /**
@@ -212,6 +213,20 @@ function App() {
 
       return false;
     });
+  }
+
+  /**
+   * Функция скроллит чат вниз
+   */
+  function scrollChatToBottom() {
+    setTimeout(() => {
+      const block = document.getElementById("chatWrapper").lastChild;
+
+      block.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end'
+      });
+    }, 100);
   }
 
   return (

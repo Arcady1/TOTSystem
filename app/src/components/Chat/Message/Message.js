@@ -1,6 +1,7 @@
 import React from 'react';
 import { RemoveMessage } from './RemoveMessage/RemoveMessage';
 import style from './Message.module.css';
+import {randomValueGenerator} from '../../../js/randomValueGenerator';
 
 function Message(props) {
     /**
@@ -30,7 +31,7 @@ function Message(props) {
                             href={txtJ}
                             target="_blank"
                             rel="noreferrer"
-                            key={new Date() - 0 + Math.random()}
+                            key={randomValueGenerator(new Date())}
                             className={style.messageLink}
                         >
                             {txtJ}
@@ -42,7 +43,7 @@ function Message(props) {
                 res.push(" ");
             }
 
-            res.push(<br key={new Date() - 0 + Math.random()} />);
+            res.push(<br key={randomValueGenerator(new Date())} />);
         }
 
         return res;

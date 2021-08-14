@@ -1,13 +1,17 @@
 import { Message } from './Message/Message';
 import style from './Chat.module.css';
+import { randomValueGenerator } from '../../js/randomValueGenerator';
 
 function Chat(props) {
     return (
         <div className={`${style.chat} ${style.chat_padding}`}>
-            <div className={style.chat__wrapper}>
+            <div
+                className={style.chat__wrapper}
+                id="chatWrapper"
+            >
                 {props.messages.map((elem) => (
                     <Message
-                        key={new Date() - 0 + Math.random()}
+                        key={randomValueGenerator(new Date())}
                         userInfo={{
                             userId: props.currentUserId,
                             userAvaSrc: elem.userData.avaSrc,

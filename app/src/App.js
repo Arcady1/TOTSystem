@@ -4,10 +4,27 @@ import { Chatlist } from './components/Chatlist/Chatlist';
 import { Chat } from './components/Chat/Chat';
 import style from './App.module.css';
 
+/**
+ * 
+ * @returns {JSX} Main JSX
+ */
 function App() {
-  const [currentMessageData, setCurrentMessageData] = useState(null);
+  /**
+   * @type {number} Индекс сообщения в чате, которое редактирует пользователь
+   * @default null
+   * Если еременная === null, то никакое сообщение не редактируется, иначе, если 
+   * переменная === {number} - индекс сообщения в массиве сообщений чата, - редактируется
+   */
+  const [currentMessageIdx, setCurrentMessageIdx] = useState(null);
 
-  // Информация о каждом зарегистрированном пользователе 
+  /** 
+   * @type {Object} Информация о каждом зарегистрированном пользователе
+   * {
+   * id: {number},      - id пользователя 
+   * avaSrc: {string},  - адрес аватарки
+   * name: {string},    - имя пользователя
+   * }
+   */
   const usersInfo = {
     0: {
       id: 0,
@@ -26,7 +43,14 @@ function App() {
     }
   }
 
-  // Сообщения в бизнес-переписке
+  /** 
+   * @type {Object []} Сообщения в бизнес-переписке
+   * {
+   * id: {number},      - id сообщения
+   * userData,          - ссылка на usersInfo конкретного польователя
+   * userText: {string} - текст сообщения
+   * }
+   */
   const [businessMessages, setBusinessMessages] = useState([
     {
       id: 101,
@@ -45,7 +69,14 @@ function App() {
     }
   ]);
 
-  // Сообщения в обычной-переписке
+  /**
+   * @type {Object []} Сообщения в обычной переписке
+   * {
+   * id: {number},      - id сообщения
+   * userData,          - ссылка на usersInfo конкретного польователя
+   * userText: {string} - текст сообщения
+   * }
+   */
   const [floodMessages, setFloodMessages] = useState([
     {
       id: 201,
@@ -64,7 +95,17 @@ function App() {
     }
   ]);
 
-  // Чаты
+  /**
+   * Существующие чаты
+   * 
+   * @type {Object []} 
+   * {
+   * dialogId: {number},    - id чата
+   * dialogImgSrc: {string},- ссылка на аватарку чата
+   * dialogName: {string},  - название чата
+   * dialogMessages         - ссыка на все сообщения чата
+   * }
+   */
   const dialogs = [
     {
       dialogId: 0,
@@ -80,13 +121,26 @@ function App() {
     }
   ];
 
-  // Какой чат сейчас открыт
+  /**
+   * @type {number} id открытого чата
+   * @default 0
+   */
   const [chatTypeId, setChatType] = useState(0);
 
+  /**
+   * Функция указывает id текущего чата
+   * 
+   * @param {number} chatId Id открытого чата
+   */
   function switchChat(chatId) {
     setChatType(chatId);
   }
 
+  /**
+   * Функция обновляет список сообщений в чате
+   * 
+   * @param {string} messagesName Название текущего чата
+   */
   function updateMessagesData(messagesName) {
     if (messagesName === "Business")
       setBusinessMessages(businessMessages.slice());
@@ -94,26 +148,40 @@ function App() {
       setFloodMessages(floodMessages.slice());
   }
 
+  /**
+   * Функция запускается при нажатии кнопки отправки ссобщения
+   * Добавляет новое сообщение в список сообщений текущего чата
+   * 
+   * @param {Object} messageInfo Информация об отправленном ссобщении
+   * {
+   * userId: {number},  - Id отправителя 
+   * text: {string}     - текст сообщения
+   * }
+   */
   function handleMessageSend(messageInfo) {
     const dialog = dialogs[chatTypeId];
 
-    if (currentMessageData === null) {
+    if (currentMessageIdx === null) {
       dialog.dialogMessages.push({
         id: new Date() - 0 + Math.random(),
         userData: usersInfo[messageInfo.userId],
         userText: messageInfo.text
       });
-
-      updateMessagesData(dialog.dialogName);
     }
     else {
-      dialog.dialogMessages[currentMessageData.idx].userText = messageInfo.text;
-
-      updateMessagesData(dialog.dialogName);
-      setCurrentMessageData(null);
+      dialog.dialogMessages[currentMessageIdx].userText = messageInfo.text;
+      setCurrentMessageIdx(null);
     }
+
+    updateMessagesData(dialog.dialogName);
   }
 
+  /**
+   * Функция запускается при нажатии кнопки удаления ссобщения
+   * Удаляет сообщение из списка сообщений текущего чата
+   * 
+   * @param {number} messageId Id удаленного из чата сообщения
+   */
   function handleMessageRemove(messageId) {
     const dialog = dialogs[chatTypeId].dialogMessages;
     const newMessagesArr = dialog.filter((message) => (!(message.id === messageId)));
@@ -124,24 +192,26 @@ function App() {
       setFloodMessages(newMessagesArr);
   }
 
+  /**
+   * Функция запускается при нажатии кнопки редактирования ссобщения
+   * Редактирует сообщение из списка сообщений текущего чата
+   * 
+   * @param {string} text Исходный текст сообщения
+   * @param {number} messageId Id редактируемого сообщения
+   */
   function handleMessageCorrect(text, messageId) {
     document.getElementById('messageInput').value = text;
 
     const message = dialogs[chatTypeId].dialogMessages;
-    const messageData = {};
 
     message.find((elem, idx) => {
       if (elem.id === messageId) {
-        messageData.id = elem.id;
-        messageData.idx = idx;
-
+        setCurrentMessageIdx(idx);
         return true;
       }
 
       return false;
     });
-
-    setCurrentMessageData(messageData);
   }
 
   return (
@@ -156,11 +226,10 @@ function App() {
           />
           <Chat
             messages={dialogs[chatTypeId].dialogMessages}
-            chatId={chatTypeId}
             currentUserId={1}
             handleMessageSend={(messageInfo) => handleMessageSend(messageInfo)}
-            onMessageRemove={(messageId) => handleMessageRemove(messageId)}
             handleMessageCorrect={(text, messageId) => handleMessageCorrect(text, messageId)}
+            onMessageRemove={(messageId) => handleMessageRemove(messageId)}
           />
         </div>
       </div>

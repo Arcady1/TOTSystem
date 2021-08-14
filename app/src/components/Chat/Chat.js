@@ -15,7 +15,6 @@ function Chat(props) {
                             userMessageText: elem.userText,
                         }}
                         messageSenderId={elem.userData.id}
-                        messageId={elem.id}
                         onMessageRemove={() => props.onMessageRemove(elem.id)}
                         onMessageCorrect={() => props.handleMessageCorrect(elem.userText, elem.id)}
                     />
@@ -45,7 +44,6 @@ function Chat(props) {
                         inputElem.value = "";
 
                         props.handleMessageSend({
-                            chatId: props.chatId,
                             userId: props.currentUserId,
                             text: inputValue
                         });

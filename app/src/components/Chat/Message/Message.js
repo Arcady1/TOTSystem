@@ -3,17 +3,27 @@ import { RemoveMessage } from './RemoveMessage/RemoveMessage';
 import style from './Message.module.css';
 
 function Message(props) {
+    /**
+     * Функция конвертирует введенный текст в JSX разметку 
+     * для его корректного отображения в HTML 
+     * 
+     * @param {string} text Текст введенного в чате сообщения
+     * @returns {JSX []} Массив JSX разметки 
+     */
     function textConverter(text) {
         let res = [];
         let splitedText = text.split("\n");
 
+        // Текст разбит по абзацам
         for (let i = 0; i < splitedText.length; i++) {
             let txtI = splitedText[i];
             let subText = txtI.split(" ");
 
+            // Абзацы разбиты по словам
             for (let j = 0; j < subText.length; j++) {
                 let txtJ = subText[j];
 
+                // Форматирование ссылок
                 if (/http([s]?):{1,2}\S+/.test(txtJ.toString())) {
                     res.push(
                         <a
@@ -38,6 +48,14 @@ function Message(props) {
         return res;
     }
 
+    /**
+     * Функция отображает кнопки удаления и редактирования сообщений
+     * для пользователя, который отправил это сообщение
+     * 
+     * @param {number} messageSenderId Id отправителя сообщения
+     * @param {number} userId Id текущего пользователя
+     * @returns {JSX | null}
+     */
     function removeMessageBlock(messageSenderId, userId) {
         if (messageSenderId === userId)
             return (

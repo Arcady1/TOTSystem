@@ -34,7 +34,12 @@ function App() {
    * @type {number} Id активного окна (0 - список чатов, 1 - чат)
    * @default 0
    */
-  const [smallWidthActiveWindow, setSmallWidthActiveWindow] = useState(0);
+  const [smallWidthActiveWindow, setSmallWidthActiveWindow] = useState(() => {
+    if (localStorage.getItem("smallWidthActiveWindow") === null)
+      return 0;
+    else
+      return localStorage.getItem("smallWidthActiveWindow") - 0;
+  });
 
   /** 
    * @type {Object} Информация о каждом зарегистрированном пользователе
@@ -234,10 +239,14 @@ function App() {
    * Функция меняет id активного окна (0 - список чатов, 1 - чат)
    */
   function changeSmallWidthActiveWindow() {
-    if (smallWidthActiveWindow === 0)
+    if (smallWidthActiveWindow === 0) {
       setSmallWidthActiveWindow(1);
-    else
+      localStorage.setItem("smallWidthActiveWindow", 1);
+    }
+    else {
       setSmallWidthActiveWindow(0);
+      localStorage.setItem("smallWidthActiveWindow", 0);
+    }
   }
 
   return (

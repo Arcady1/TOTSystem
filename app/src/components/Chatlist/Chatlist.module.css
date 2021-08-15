@@ -5,4 +5,17 @@
     background-color: #fff;
     border-radius: 0 0 var(--message-border-radius) var(--message-border-radius);
     overflow: auto;
+    transition: var(--main-transition);
+}
+
+@media (max-width: 425px) {
+    .chatList {
+        position: absolute;
+        width: 100%;
+        left: -100%;
+    }
+
+    .chatListShow {
+        left: 0;
+    }
 }

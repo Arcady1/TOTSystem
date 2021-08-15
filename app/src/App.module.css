@@ -1,6 +1,7 @@
 .content__wrapper {
   display: block;
   width: 100%;
+  min-width: 320px;
   min-height: 100vh;
 }
 
@@ -24,4 +25,10 @@
   display: flex;
   width: 100%;
   height: calc(100% - var(--header-height));
+}
+
+@media (max-width: 425px) {
+  .main {
+    position: relative;
+  }
 }

@@ -6,7 +6,40 @@
     height: var(--header-height);
     background-color: #fff;
     border-radius: var(--message-border-radius) var(--message-border-radius) var(--message-border-radius) 0;
+    position: relative;
 
     font-weight: 600;
     font-size: 1.5rem;
+}
+
+.menuButton {
+    display: none;
+    width: 20px;
+    height: 20px;
+    background-image: url('https://image.flaticon.com/icons/png/512/992/992703.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transform: rotate(-90deg) scale(1);
+    transition: var(--main-transition);
+}
+
+.menuButton:hover {
+    transform: rotate(-90deg) scale(1.2);
+}
+
+@media (max-width: 425px) {
+    .menuButton {
+        display: block;
+        position: absolute;
+        left: 10px;
+    }
+
+    .rotateMenuButton {
+        transform: rotate(90deg) scale(1);
+    }
+
+    .rotateMenuButton:hover {
+        transform: rotate(90deg) scale(1.2);
+    }
 }

@@ -4,6 +4,7 @@
     justify-content: flex-end;
     width: 70%;
     height: 100%;
+    transition: var(--main-transition);
 }
 
 .chat__wrapper {
@@ -77,4 +78,21 @@
 
 .chat__sendButton:hover {
     transform: scale(1.3);
+}
+
+@media (max-width: 425px) {
+    .chat {
+        position: absolute;
+        width: 100%;
+        left: 0;
+    }
+
+    .chat_padding {
+        padding: calc(max(2%, 10px));
+        padding-top: calc(max(2%, 10px));
+    }
+
+    .chatShow {
+        left: -100%;
+    }
 }

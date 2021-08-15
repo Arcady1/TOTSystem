@@ -19,6 +19,18 @@ function App() {
    */
   const [currentMessageIdx, setCurrentMessageIdx] = useState(null);
 
+  /**
+   * @type {number} Id открытого чата
+   * @default 0
+   */
+  const [chatTypeId, setChatType] = useState(0);
+
+  /**
+   * @type {number} Id активного окна (0 - список чатов, 1 - чат)
+   * @default 0
+   */
+  const [smallWidthActiveWindow, setSmallWidthActiveWindow] = useState(0);
+
   /** 
    * @type {Object} Информация о каждом зарегистрированном пользователе
    * {
@@ -92,18 +104,13 @@ function App() {
   ];
 
   /**
-   * @type {number} id открытого чата
-   * @default 0
-   */
-  const [chatTypeId, setChatType] = useState(0);
-
-  /**
    * Функция указывает id текущего чата
    * 
    * @param {number} chatId Id открытого чата
    */
   function switchChat(chatId) {
     setChatType(chatId);
+    changeSmallWidthActiveWindow();
   }
 
   /**
@@ -199,15 +206,29 @@ function App() {
     }, 100);
   }
 
+  /**
+   * Функция меняет id активного окна (0 - список чатов, 1 - чат)
+   */
+  function changeSmallWidthActiveWindow() {
+    if (smallWidthActiveWindow === 0)
+      setSmallWidthActiveWindow(1);
+    else
+      setSmallWidthActiveWindow(0);
+  }
+
   return (
     <div className={style.content__wrapper}>
       <div className={`${style.content} ${style.content_padding} ${style.content_margin}`}>
-        <Header />
+        <Header
+          smallWidthActiveWindow={smallWidthActiveWindow}
+          changeSmallWidthActiveWindow={() => changeSmallWidthActiveWindow()}
+        />
         <div className={style.main}>
           <Chatlist
             dialogs={dialogs}
             switchChat={(chatId) => switchChat(chatId)}
             activeChatId={chatTypeId}
+            smallWidthActiveWindow={smallWidthActiveWindow}
           />
           <Chat
             messages={dialogs[chatTypeId].dialogMessages}
@@ -215,6 +236,7 @@ function App() {
             handleMessageSend={(messageInfo) => handleMessageSend(messageInfo)}
             handleMessageCorrect={(text, messageId) => handleMessageCorrect(text, messageId)}
             onMessageRemove={(messageId) => handleMessageRemove(messageId)}
+            smallWidthActiveWindow={smallWidthActiveWindow}
           />
         </div>
       </div>

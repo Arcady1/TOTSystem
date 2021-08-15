@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Header } from './components/Header/Header';
 import { Chatlist } from './components/Chatlist/Chatlist';
 import { Chat } from './components/Chat/Chat';
+import { getBusinessChat } from './js/businessMessages';
+import { getFloodChat } from './js/floodMessages';
 import style from './App.module.css';
 
 /**
@@ -51,23 +53,7 @@ function App() {
    * userText: {string} - текст сообщения
    * }
    */
-  const [businessMessages, setBusinessMessages] = useState([
-    {
-      id: 101,
-      userData: usersInfo[0],
-      userText: "Всем привет!"
-    },
-    {
-      id: 102,
-      userData: usersInfo[1],
-      userText: "Добрый день!"
-    },
-    {
-      id: 103,
-      userData: usersInfo[2],
-      userText: "Приветствую :)"
-    }
-  ]);
+  const [businessMessages, setBusinessMessages] = useState(getBusinessChat(usersInfo));
 
   /**
    * @type {Object []} Сообщения в обычной переписке
@@ -77,23 +63,7 @@ function App() {
    * userText: {string} - текст сообщения
    * }
    */
-  const [floodMessages, setFloodMessages] = useState([
-    {
-      id: 201,
-      userData: usersInfo[1],
-      userText: "Всем привет! Это флууд чат)"
-    },
-    {
-      id: 202,
-      userData: usersInfo[2],
-      userText: "Хай!"
-    },
-    {
-      id: 203,
-      userData: usersInfo[0],
-      userText: "Приветствую! Неформальное общение!)"
-    }
-  ]);
+  const [floodMessages, setFloodMessages] = useState(getFloodChat(usersInfo));
 
   /**
    * Существующие чаты

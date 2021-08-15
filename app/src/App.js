@@ -23,7 +23,12 @@ function App() {
    * @type {number} Id открытого чата
    * @default 0
    */
-  const [chatTypeId, setChatType] = useState(0);
+  const [chatTypeId, setChatType] = useState(() => {
+    if (localStorage.getItem("chatId") === null)
+      return 0;
+    else
+      return localStorage.getItem("chatId") - 0;
+  });
 
   /**
    * @type {number} Id активного окна (0 - список чатов, 1 - чат)
@@ -65,7 +70,12 @@ function App() {
    * userText: {string} - текст сообщения
    * }
    */
-  const [businessMessages, setBusinessMessages] = useState(getBusinessChat(usersInfo));
+  const [businessMessages, setBusinessMessages] = useState(() => {
+    if (localStorage.getItem("business") === null)
+      return getBusinessChat(usersInfo);
+    else
+      return JSON.parse(localStorage.getItem("business"));
+  });
 
   /**
    * @type {Object []} Сообщения в обычной переписке
@@ -75,7 +85,12 @@ function App() {
    * userText: {string} - текст сообщения
    * }
    */
-  const [floodMessages, setFloodMessages] = useState(getFloodChat(usersInfo));
+  const [floodMessages, setFloodMessages] = useState(() => {
+    if (localStorage.getItem("flood") === null)
+      return getFloodChat(usersInfo);
+    else
+      return JSON.parse(localStorage.getItem("flood"));
+  });
 
   /**
    * Существующие чаты
@@ -111,6 +126,7 @@ function App() {
   function switchChat(chatId) {
     setChatType(chatId);
     changeSmallWidthActiveWindow();
+    localStorage.setItem("chatId", chatId);
   }
 
   /**
@@ -119,10 +135,14 @@ function App() {
    * @param {string} messagesName Название текущего чата
    */
   function updateMessagesData(messagesName) {
-    if (messagesName === "Business")
+    if (messagesName === "Business") {
       setBusinessMessages(businessMessages.slice());
-    else if (messagesName === "Flood")
+      localStorage.setItem("business", JSON.stringify(businessMessages));
+    }
+    else if (messagesName === "Flood") {
       setFloodMessages(floodMessages.slice());
+      localStorage.setItem("flood", JSON.stringify(floodMessages));
+    }
   }
 
   /**
@@ -164,10 +184,14 @@ function App() {
     const dialog = dialogs[chatTypeId].dialogMessages;
     const newMessagesArr = dialog.filter((message) => (!(message.id === messageId)));
 
-    if (dialogs[chatTypeId].dialogName === "Business")
+    if (dialogs[chatTypeId].dialogName === "Business") {
       setBusinessMessages(newMessagesArr);
-    else if (dialogs[chatTypeId].dialogName === "Flood")
+      localStorage.setItem("business", JSON.stringify(newMessagesArr));
+    }
+    else if (dialogs[chatTypeId].dialogName === "Flood") {
       setFloodMessages(newMessagesArr);
+      localStorage.setItem("flood", JSON.stringify(newMessagesArr));
+    }
   }
 
   /**

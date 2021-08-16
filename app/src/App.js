@@ -11,7 +11,10 @@ import style from './App.module.css';
  * @returns {JSX} Main JSX
  */
 function App() {
-  // !
+  /**
+   * @type {number} Id текущего пользователя
+   * @default 1
+   */
   const currentUserId = 1;
 
   /**

@@ -22,7 +22,7 @@ function Chat(props) {
                 className={style.chat__wrapper}
                 id="chatWrapper"
             >
-                {props.messages.map((elem) => (
+                {props.messages.map((elem, messageIdxInChatArray) => (
                     <Message
                         key={randomValueGenerator(new Date())}
                         userInfo={{
@@ -30,10 +30,12 @@ function Chat(props) {
                             userAvaSrc: elem.userData.avaSrc,
                             userName: elem.userData.name,
                             userMessageText: elem.userText,
+                            usersLikes: elem.usersLikes
                         }}
                         messageSenderId={elem.userData.id}
-                        onMessageRemove={() => props.onMessageRemove(elem.id)}
-                        onMessageCorrect={() => props.handleMessageCorrect(elem.userText, elem.id)}
+                        onMessageRemove={() => props.onMessageRemove(messageIdxInChatArray)}
+                        onMessageCorrect={() => props.handleMessageCorrect(elem.userText, messageIdxInChatArray)}
+                        handleLikeMessageClick={() => props.handleLikeMessageClick(messageIdxInChatArray)}
                     />
                 ))}
             </div>

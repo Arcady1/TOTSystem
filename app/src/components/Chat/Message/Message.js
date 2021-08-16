@@ -1,7 +1,7 @@
 import React from 'react';
 import { RemoveMessage } from './RemoveMessage/RemoveMessage';
 import style from './Message.module.css';
-import {randomValueGenerator} from '../../../js/randomValueGenerator';
+import { randomValueGenerator } from '../../../js/randomValueGenerator';
 
 function Message(props) {
     /**
@@ -69,6 +69,20 @@ function Message(props) {
             return null;
     }
 
+    /**
+     * Функция проверяет, поставил ли пользователь лайк под сообщением
+     * 
+     * @param {number} currentUserId Id текущего пользователя
+     * @param {number []} likesArr Массив id пользователей, поставивших лайк под сообщениями
+     * @returns {string}
+     */
+    function didUserLikeThisMessage(currentUserId, likesArr) {
+        if (likesArr.includes(currentUserId))
+            return style.likeMessage;
+        else
+            return "";
+    }
+
     return (
         <div className={`${style.message__wrapper} ${style.message__wrapper_padding} ${style.message__wrapper_margin}`}>
             {removeMessageBlock(props.messageSenderId, props.userInfo.userId)}
@@ -81,6 +95,14 @@ function Message(props) {
                 <p className={style.message__userName}>{props.userInfo.userName}</p>
             </div>
             <p className={`${style.message__text} ${style.message__text_margin}`}>{textConverter(props.userInfo.userMessageText)}</p>
+            <button
+                className={`${style.heartMessage} ${style.dislikeMessage} ${didUserLikeThisMessage(props.userInfo.userId, props.userInfo.usersLikes)}`}
+                onClick={(event) => {
+                    event.preventDefault();
+                    return props.handleLikeMessageClick();
+                }}
+            >
+            </button>
         </div>
     )
 }

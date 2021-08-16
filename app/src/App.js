@@ -11,6 +11,9 @@ import style from './App.module.css';
  * @returns {JSX} Main JSX
  */
 function App() {
+  // !
+  const currentUserId = 1;
+
   /**
    * @type {number} Индекс сообщения в чате, которое редактирует пользователь
    * @default null
@@ -139,12 +142,12 @@ function App() {
    * 
    * @param {string} messagesName Название текущего чата
    */
-  function updateMessagesData(messagesName) {
-    if (messagesName === "Business") {
+  function updateMessagesData(chatTypeId) {
+    if (chatTypeId === 0) {
       setBusinessMessages(businessMessages.slice());
       localStorage.setItem("business", JSON.stringify(businessMessages));
     }
-    else if (messagesName === "Flood") {
+    else if (chatTypeId === 1) {
       setFloodMessages(floodMessages.slice());
       localStorage.setItem("flood", JSON.stringify(floodMessages));
     }
@@ -167,7 +170,8 @@ function App() {
       dialog.dialogMessages.push({
         id: new Date() - 0 + Math.random(),
         userData: usersInfo[messageInfo.userId],
-        userText: messageInfo.text
+        userText: messageInfo.text,
+        usersLikes: []
       });
     }
     else {
@@ -175,7 +179,7 @@ function App() {
       setCurrentMessageIdx(null);
     }
 
-    updateMessagesData(dialog.dialogName);
+    updateMessagesData(chatTypeId);
     scrollChatToBottom();
   }
 
@@ -183,20 +187,13 @@ function App() {
    * Функция запускается при нажатии кнопки удаления ссобщения
    * Удаляет сообщение из списка сообщений текущего чата
    * 
-   * @param {number} messageId Id удаленного из чата сообщения
+   * @param {number} messageIdx Индекс удаленного из чата сообщения
    */
-  function handleMessageRemove(messageId) {
+  function handleMessageRemove(messageIdx) {
     const dialog = dialogs[chatTypeId].dialogMessages;
-    const newMessagesArr = dialog.filter((message) => (!(message.id === messageId)));
 
-    if (dialogs[chatTypeId].dialogName === "Business") {
-      setBusinessMessages(newMessagesArr);
-      localStorage.setItem("business", JSON.stringify(newMessagesArr));
-    }
-    else if (dialogs[chatTypeId].dialogName === "Flood") {
-      setFloodMessages(newMessagesArr);
-      localStorage.setItem("flood", JSON.stringify(newMessagesArr));
-    }
+    dialog.splice(messageIdx, 1);
+    updateMessagesData(chatTypeId);
   }
 
   /**
@@ -204,21 +201,11 @@ function App() {
    * Редактирует сообщение из списка сообщений текущего чата
    * 
    * @param {string} text Исходный текст сообщения
-   * @param {number} messageId Id редактируемого сообщения
+   * @param {number} messageIdx Индекс редактируемого сообщения
    */
-  function handleMessageCorrect(text, messageId) {
+  function handleMessageCorrect(text, messageIdx) {
     document.getElementById('messageInput').value = text;
-
-    const message = dialogs[chatTypeId].dialogMessages;
-
-    message.find((elem, idx) => {
-      if (elem.id === messageId) {
-        setCurrentMessageIdx(idx);
-        return true;
-      }
-
-      return false;
-    });
+    setCurrentMessageIdx(messageIdx);
   }
 
   /**
@@ -249,6 +236,31 @@ function App() {
     }
   }
 
+  /**
+   * Функция добавляет / удаляет лайки пользователя под сообщениями
+   * 
+   * @param {number} messageIdx Индекс сообщения в массиве сообщений чата
+   */
+  function handleLikeMessageClick(messageIdx) {
+    const dialogMessages = dialogs.find((dialog) => dialog.dialogId === chatTypeId).dialogMessages;
+    const messageLikes = dialogMessages[messageIdx].usersLikes;
+    let idxOfMessage = -1;
+
+    for (let i = 0; i < messageLikes.length; i++) {
+      if (messageLikes[i] === currentUserId) {
+        idxOfMessage = i;
+        break;
+      }
+    }
+
+    if (idxOfMessage === -1)
+      messageLikes.push(currentUserId);
+    else
+      messageLikes.splice(idxOfMessage, 1);
+
+    updateMessagesData(chatTypeId);
+  }
+
   return (
     <div className={style.content__wrapper}>
       <div className={`${style.content} ${style.content_padding} ${style.content_margin}`}>
@@ -265,10 +277,11 @@ function App() {
           />
           <Chat
             messages={dialogs[chatTypeId].dialogMessages}
-            currentUserId={1}
+            currentUserId={currentUserId}
             handleMessageSend={(messageInfo) => handleMessageSend(messageInfo)}
-            handleMessageCorrect={(text, messageId) => handleMessageCorrect(text, messageId)}
-            onMessageRemove={(messageId) => handleMessageRemove(messageId)}
+            handleMessageCorrect={(text, messageIdx) => handleMessageCorrect(text, messageIdx)}
+            handleLikeMessageClick={(messageIdx) => handleLikeMessageClick(messageIdx)}
+            onMessageRemove={(messageIdx) => handleMessageRemove(messageIdx)}
             smallWidthActiveWindow={smallWidthActiveWindow}
           />
         </div>

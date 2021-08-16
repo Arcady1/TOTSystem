@@ -75,3 +75,28 @@
 .messageLink:hover {
     text-decoration: underline;
 }
+
+.heartMessage {
+    display: block;
+    position: absolute;
+    right: calc(var(--message-remove-icon-size) / 3);
+    bottom: calc(var(--message-remove-icon-size) / 3);
+    width: var(--message-remove-icon-size);
+    height: var(--message-remove-icon-size);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: var(--main-transition);
+}
+
+.heartMessage:hover {
+    transform: scale(1.2);
+}
+
+.dislikeMessage {
+    background-image: url('./img/dislike.svg');
+}
+
+.likeMessage {
+    background-image: url('./img/like.svg');
+}

@@ -18,7 +18,10 @@ function Header(props) {
         <header className={style.header}>
             <button
                 className={`${style.menuButton} ${rotateButton()}`}
-                onClick={() => props.changeSmallWidthActiveWindow()}
+                onClick={(event) => {
+                    event.preventDefault();
+                    return props.changeSmallWidthActiveWindow()
+                }}
             >
             </button>
             <p>TOT Systems chat</p>

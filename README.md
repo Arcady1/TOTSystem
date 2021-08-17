@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-This is a simple chat room.
+This is a simple chat room
 
 ![GIF][0]
 

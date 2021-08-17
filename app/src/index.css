@@ -25,14 +25,6 @@ button:hover {
   cursor: pointer;
 }
 
-*::-webkit-scrollbar {
-  width: 5px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #223c50;
-}
-
 :root {
   --max-width: 1440px;
   --min-width: 320px;
@@ -50,6 +42,7 @@ button:hover {
   --message-margin: 10px;
   --message-icon-size: 30px;
   --message-remove-icon-size: 15px;
+  --input-emoji-size: 18px;
 }
 
 html {

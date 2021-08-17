@@ -1,8 +1,20 @@
 import { Message } from './Message/Message';
-import style from './Chat.module.css';
 import { randomValueGenerator } from '../../js/randomValueGenerator';
+import Picker from 'emoji-picker-react';
+import style from './Chat.module.css';
 
 function Chat(props) {
+    /**
+     * Функция добавляет выбранное эмоджи в input
+     * 
+     * @param {Event} event 
+     * @param {Object} emojiObject 
+     */
+    function onEmojiClick(event, emojiObject) {
+        const input = document.getElementById('messageInput');
+        input.value += emojiObject.emoji;
+    };
+
     /**
      * Функция показывает / скрывает переписку
      * 
@@ -40,13 +52,18 @@ function Chat(props) {
                 ))}
             </div>
             <div className={`${style.chat__input__wrapper} ${style.chat__input__wrapper_margin}`}>
-                <textarea
-                    id="messageInput"
-                    className={`${style.chat__input} ${style.chat__input_padding} ${style.chat__input_margin}`}
-                    rows="30"
-                    cols="30"
-                    placeholder="Message"
-                />
+                <div className={style.textarea__wrapper}>
+                    <textarea
+                        id="messageInput"
+                        className={`${style.chat__input} ${style.chat__input_padding} ${style.chat__input_margin}`}
+                        rows="30"
+                        cols="30"
+                        placeholder="Message"
+                    />
+                    <div className={style.input__emoji__wrapper}>
+                        <Picker onEmojiClick={onEmojiClick} />
+                    </div>
+                </div>
                 <button
                     className={style.chat__sendButton}
                     onClick={(event) => {

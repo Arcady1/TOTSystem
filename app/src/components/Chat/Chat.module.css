@@ -11,8 +11,14 @@
     overflow: auto;
 }
 
-.chat__wrapper::-webkit-scrollbar {
-    width: 0;
+.chat__wrapper::-webkit-scrollbar,
+.chat__input::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat__wrapper::-webkit-scrollbar-thumb,
+.chat__input::-webkit-scrollbar-thumb {
+    background-color: #223c50;
 }
 
 .chat_padding {
@@ -33,9 +39,16 @@
     margin-top: calc(2 * var(--message-margin));
 }
 
-.chat__input {
+.textarea__wrapper {
     display: block;
     width: 90%;
+    height: 100%;
+    position: relative;
+}
+
+.chat__input {
+    display: block;
+    width: 100%;
     height: 100%;
     background-color: var(--message-bgc);
     border-radius: var(--message-border-radius);
@@ -59,10 +72,42 @@
 
 .chat__input_padding {
     padding: calc(max(2%, 10px));
+    padding-right: calc(max(2.5%, 22px));
 }
 
 .chat__input_margin {
     margin-right: 10px;
+}
+
+.input__emoji__wrapper {
+    display: block;
+    position: absolute;
+    width: var(--input-emoji-size);
+    height: var(--input-emoji-size);
+    background-image: url('./img/smile.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    bottom: calc(var(--input-emoji-size) / 3);
+    right: calc(var(--input-emoji-size) / 2);
+}
+
+.input__emoji__wrapper aside {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: 100% 100%;
+    transition: var(--main-transition);
+    right: 255px;
+    bottom: 325px;
+}
+
+.input__emoji__wrapper:hover {
+    cursor: pointer;
+}
+
+.input__emoji__wrapper:hover aside {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .chat__sendButton {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { RemoveMessage } from './RemoveMessage/RemoveMessage';
-import style from './Message.module.css';
 import { randomValueGenerator } from '../../../js/randomValueGenerator';
+import style from './Message.module.css';
 
 function Message(props) {
     /**

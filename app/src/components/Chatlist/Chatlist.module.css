@@ -8,6 +8,14 @@
     transition: var(--main-transition);
 }
 
+.chatList::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chatList::-webkit-scrollbar-thumb {
+    background-color: #223c50;
+}
+
 @media (max-width: 425px) {
     .chatList {
         position: absolute;

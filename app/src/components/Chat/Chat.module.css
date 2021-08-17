@@ -114,7 +114,7 @@
     display: block;
     width: var(--submit-button-size);
     height: var(--submit-button-size);
-    background-image: url('https://image.flaticon.com/icons/png/512/736/736212.png');
+    background-image: url('./img/send.svg');
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;

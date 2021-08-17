@@ -117,13 +117,13 @@ function App() {
   const dialogs = [
     {
       dialogId: 0,
-      dialogImgSrc: "https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547__480.jpg",
+      dialogImgSrc: "https://image.flaticon.com/icons/png/512/2910/2910791.png",
       dialogName: "Business",
       dialogMessages: businessMessages,
     },
     {
       dialogId: 1,
-      dialogImgSrc: "https://i.pinimg.com/originals/83/64/66/83646654668bf9ae412f45bb2e417ddf.jpg",
+      dialogImgSrc: "https://image.flaticon.com/icons/png/512/170/170069.png",
       dialogName: "Flood",
       dialogMessages: floodMessages,
     }

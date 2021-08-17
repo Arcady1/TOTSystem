@@ -1,13 +1,11 @@
 <h1 align="center">
-  <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">
+  <a href="https://tot-system-chat.herokuapp.com/">
     <img src="https://image.flaticon.com/icons/png/512/610/610413.png" alt="" width="500px"></img>
   </a>
   <br>
-  <a href="https://scrolling-web-page-with-your-eyes.glitch.me/">TOT System Chat</a>
+  <a href="https://tot-system-chat.herokuapp.com/">TOT System Chat</a>
   <br>
 </h1>
-
-This is a simple chat room
 
 ![GIF][0]
 
@@ -52,8 +50,8 @@ This software uses the following open source packages:
 MIT
 
 [0]: https://github.com/Arcady1/Scrolling-web-page-with-your-eyes/blob/main/web/github/eye-control-gif.gif
-[1]: https://scrolling-web-page-with-your-eyes.glitch.me/
 
+[1]: https://tot-system-chat.herokuapp.com/
 [2]: https://github.com/facebook/react/
 [3]: https://www.npmjs.com/package/emoji-picker-react
 [4]: https://medium.com/@tatarinov.alexander/how-to-use-emoji-in-react-813810d4fbe4

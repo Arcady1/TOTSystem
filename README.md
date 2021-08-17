@@ -49,8 +49,7 @@ This software uses the following open source packages:
 ### License
 MIT
 
-[0]: https://github.com/Arcady1/Scrolling-web-page-with-your-eyes/blob/main/web/github/eye-control-gif.gif
-
+[0]: https://github.com/Arcady1/TOTSystem/blob/master/github_gif/chat.gif
 [1]: https://tot-system-chat.herokuapp.com/
 [2]: https://github.com/facebook/react/
 [3]: https://www.npmjs.com/package/emoji-picker-react

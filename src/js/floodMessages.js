@@ -14,7 +14,7 @@ function getFloodChat(usersInfo) {
     return ([{
         id: 201,
         userData: usersInfo[1],
-        userText: "Всем привет! Это флууд чат)",
+        userText: "Всем привет! Это флуд чат)",
         usersLikes: []
     },
     {
@@ -26,7 +26,7 @@ function getFloodChat(usersInfo) {
     {
         id: 203,
         userData: usersInfo[0],
-        userText: "Приветствую! Неформальное общение!)",
+        userText: "Привет! :)",
         usersLikes: []
     }
     ]);

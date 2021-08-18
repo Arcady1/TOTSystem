@@ -11,7 +11,7 @@
 
 ### How it works
 * Open this [DEMO][1]
-* Choose chat :)
+* Choose chat
 * Write a message and send it
 * Edit or delete a message you have sent if necessary
 * Like the messages you like

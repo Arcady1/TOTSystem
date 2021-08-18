@@ -140,4 +140,8 @@
     .chatShow {
         left: -100%;
     }
+
+    .input__emoji__wrapper{
+        display: none;
+    }
 }

@@ -140,4 +140,12 @@
     .chatShow {
         left: -100%;
     }
+
+    .chat__input_padding {
+        padding: calc(max(2%, 10px));
+    }
+
+    .input__emoji__wrapper{
+        display: none;
+    }
 }

@@ -76,13 +76,7 @@ function Message(props) {
      * @param {number []} likesArr Массив id пользователей, поставивших лайк под сообщениями
      * @returns {string}
      */
-    function didUserLikeThisMessage(currentUserId, likesArr) {
-        if (likesArr.includes(currentUserId))
-            return style.likeMessage;
-        else
-            return "";
-    }
-
+    
     return (
         <div className={`${style.message__wrapper} ${style.message__wrapper_padding} ${style.message__wrapper_margin}`}>
             {removeMessageBlock(props.messageSenderId, props.userInfo.userId)}
@@ -96,7 +90,7 @@ function Message(props) {
             </div>
             <p className={`${style.message__text} ${style.message__text_margin}`}>{textConverter(props.userInfo.userMessageText)}</p>
             <button
-                className={`${style.heartMessage} ${style.dislikeMessage} ${didUserLikeThisMessage(props.userInfo.userId, props.userInfo.usersLikes)}`}
+                className={`${style.heartMessage} ${style.dislikeMessage} ${props.userInfo.usersLikes.includes(props.userInfo.userId) ? style.likeMessage : ""}`}
                 onClick={(event) => {
                     event.preventDefault();
                     return props.handleLikeMessageClick();

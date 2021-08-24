@@ -15,21 +15,8 @@ function Chat(props) {
         input.value += emojiObject.emoji;
     };
 
-    /**
-     * Функция показывает / скрывает переписку
-     * 
-     * @param {number} activeWindow Id активного окна (0 - список чатов, 1 - чат)
-     * @returns {string} 
-     */
-    function setClassIfSmallWidthActiveWindow(activeWindow) {
-        if (activeWindow === 0)
-            return style.chatShow;
-        else
-            return "";
-    }
-
     return (
-        <div className={`${style.chat} ${style.chat_padding} ${setClassIfSmallWidthActiveWindow(props.smallWidthActiveWindow)}`}>
+        <div className={`${style.chat} ${style.chat_padding} ${props.smallWidthActiveWindow === 0 ? style.chatShow : ""}`}>
             <div
                 className={style.chat__wrapper}
                 id="chatWrapper"

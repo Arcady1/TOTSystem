@@ -1,9 +1,16 @@
+import { useRef } from 'react';
 import { Message } from './Message/Message';
 import { randomValueGenerator } from '../../js/randomValueGenerator';
 import Picker from 'emoji-picker-react';
 import style from './Chat.module.css';
 
 function Chat(props) {
+    /**
+     * @type {Object} Ссылка на DOM textarea
+     * @default null
+     */
+    const inputEl = useRef(null);
+
     /**
      * Функция добавляет выбранное эмоджи в input
      * 
@@ -14,6 +21,30 @@ function Chat(props) {
         const input = document.getElementById('messageInput');
         input.value += emojiObject.emoji;
     };
+
+    /**
+     * Функция реагирует на отправку сообщения пользователем
+     * 
+     * @returns {Boolean | void}
+     */
+    function onSubmitButtonClick() {
+        const inputTextareaElem = inputEl.current;
+        const inputValue = inputTextareaElem.value;
+
+        inputTextareaElem.focus();
+
+        if (!/(\s*\S+\s*)+/g.test(inputValue)) {
+            inputTextareaElem.value = "";
+            return false;
+        }
+
+        inputTextareaElem.value = "";
+
+        props.handleMessageSend({
+            userId: props.currentUserId,
+            text: inputValue
+        });
+    }
 
     return (
         <div className={`${style.chat} ${style.chat_padding} ${props.smallWidthActiveWindow === 0 ? style.chatShow : ""}`}>
@@ -46,6 +77,7 @@ function Chat(props) {
                         rows="30"
                         cols="30"
                         placeholder="Message"
+                        ref={inputEl}
                     />
                     <div className={style.input__emoji__wrapper}>
                         <Picker onEmojiClick={onEmojiClick} />
@@ -55,21 +87,7 @@ function Chat(props) {
                     className={style.chat__sendButton}
                     onClick={(event) => {
                         event.preventDefault();
-
-                        const inputElem = document.getElementById("messageInput");
-                        const inputValue = inputElem.value;
-
-                        if (!/(\s*\S+\s*)+/g.test(inputValue)) {
-                            inputElem.value = "";
-                            return false;
-                        }
-
-                        inputElem.value = "";
-
-                        props.handleMessageSend({
-                            userId: props.currentUserId,
-                            text: inputValue
-                        });
+                        return onSubmitButtonClick();
                     }}
                 >
                 </button>
